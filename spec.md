@@ -210,23 +210,54 @@
    - *Người dùng bình thường có phải chờ vô ích không?* **Không.** Nhờ tách `de_xuat_hoan_tien` sang mức **Tự làm**, người mua ở ca rõ ràng này không phải chờ nhân viên sàn duyệt mới được tạo phiếu trả hàng: họ nhận ngay hướng dẫn đóng gói gửi hàng trong vài giây, còn bước nhân viên bấm `duyet_hoan_tien` diễn ra song song ở khâu đối soát cuối nên không làm chậm trải nghiệm của khách.
 
 ### 4.4 Thay đổi lời hứa với người dùng
-- **Mức tự chủ đã đổi lời hứa nào với người dùng:**
+- **Mức tự chủ đã đổi lời hứa nào với người dùng:** Đặt `soan_hoan_tien` và `tu_choi_khieu_nai` ở mức **Cần người duyệt** (AI soạn đề xuất, nhân viên bấm) đã đổi lời hứa từ *"Trợ lý giải quyết khiếu nại cho bạn"* thành *"Trợ lý cho bạn biết ngay căn cứ và bước tiếp theo; nhân viên sàn quyết sau khi người bán được nghe"*.
+
+| Ai nghe lời hứa | Nếu AI tự hoàn / tự đóng khiếu nại *(mức Tự làm)* | Mức nhóm chọn *(AI soạn, nhân viên duyệt)* |
+|---|---|---|
+| **Người mua** | "Gửi đủ ảnh là được hoàn tiền ngay." | "Bạn biết ngay căn cứ và còn thiếu gì. Tiền do sàn giữ trong lúc chờ. Nhân viên quyết sau khi người bán có 24 giờ phản hồi (và sau khi hàng trả về kho, nếu hoàn tiền)." |
+| **Người bán** | Không hứa được gì: khiếu nại có thể bị xử trước khi shop kịp nói (N2). | "Không khoản hoàn tiền hay đóng khiếu nại nào xảy ra trước khi bạn được báo và có 24 giờ phản hồi." |
+
+- **Câu AI phải đổi theo:** AI không được nói *"Mình sẽ hoàn tiền cho bạn"* hay *"Yêu cầu của bạn đã được chấp nhận"*, vì AI không có quyền làm việc đó. Thay bằng câu nói đúng trạng thái: *"Mình chưa hoàn tiền và cũng chưa đóng khiếu nại"* (câu nguyên văn ở §3, N2).
+- **Cái giá của lời hứa mới:** Người mua đúng (N1, N3) chờ lâu hơn so với khi AI tự hoàn. Nhóm bù lại bằng ba thứ: người mua thấy ngay căn cứ và đúng một mục còn thiếu; thấy đồng hồ hạn phản hồi của người bán; nút "Gặp nhân viên" luôn có.
+- **Lời hứa thứ hai, do `phat_shop` ở mức Cấm:** AI không hứa *"Shop sẽ bị xử lý"* (M2), chỉ hứa *"Đã chuyển bộ phận chuyên trách xem xét"* và không hứa trước kết quả.
+- **Lời hứa hiện ở đâu trên prototype:** dải trạng thái **[4]** ở màn người mua (*"Chưa có quyết định hoàn tiền hoặc bác khiếu nại · Người quyết: nhân viên sàn · Tiền đang do sàn giữ"*) và ô hạn phản hồi **[6]** ở màn người bán.
 
 ---
 
 ## §5. Prototype *(chặng 5)*
 
-- **Link / File:** [prototype/index.html](./prototype/index.html)
-- **Công cụ:** HTML / CSS / JS
-- **Phần nào mock / Có lời gọi AI thật không:**
+- **Link / File:** [prototype/index.html](./prototype/index.html). Mở trực tiếp bằng trình duyệt, không cần cài đặt hay mạng.
+- **Công cụ:** HTML / CSS / JS thuần trong một file, dựng cùng coding agent (Claude Code).
+- **Màn hình:** ba màn đặt cạnh nhau cho cùng một khiếu nại: **① Người mua** (chat với trợ lý) · **② Người bán** (bonus: thấy khiếu nại và hạn phản hồi) · **③ Nhân viên sàn** (người duyệt). Có hai ca bấm được từ đầu tới cuối: **N1** (shop sửa mô tả sau khi bán) và **N2** (người bán đúng, khách doạ bóc phốt). Dòng **"Bước tiếp"** ở đầu trang chỉ chỗ bấm kế tiếp.
+- **Phần nào mock / Có lời gọi AI thật không:** **Không có lời gọi AI thật**, trong code không có API key. Những phần sau là mock:
+  - Câu trợ lý ở N1 và N2 là câu nguyên văn ở §3, viết sẵn.
+  - Mỗi lời gọi tool (`xem_mo_ta_luc_dat`, `yeu_cau_bang_chung`, `de_xuat_*`, `chuyen_truong_nhom`, `duyet_*`) chỉ là một thay đổi trạng thái trong trang, hiện ở mục "Nhật ký AI" của màn nhân viên.
+  - Đơn hàng, mô tả, ảnh/video, mã nhân viên, hạn 24 giờ và hạn trả hàng 7 ngày đều là số dựng, không phải chính sách Shopee thật.
+  - Các nút viền đứt **"⏩ Mô phỏng…"** (hết 24 giờ, kho nhận hàng trả) là điều khiển demo để tua thời gian, không phải giao diện sản phẩm.
+  - Ô "Nhắn trợ lý" cho ca lạ chạy bằng luật từ khoá: SĐT/địa chỉ (M3), hàng giả/khoá shop (M2), doạ bóc phốt, đòi hoàn ngay, đổi ý (M1), gặp nhân viên. Tin không khớp luật nào thì trợ lý hỏi lại một câu và mời gặp nhân viên, không đoán.
+- **Đường bấm demo:**
+  - **N1:** Bổ sung bằng chứng → người bán bấm "Đồng ý trả hàng" → người mua bấm "Tạo phiếu gửi trả" → "⏩ kho đã nhận hàng trả" → nhân viên bấm "Duyệt hoàn tiền" và tích ô xác nhận.
+  - **N1, nhánh tranh chấp:** người bán bấm "Không đồng ý · gửi bằng chứng" → AI không đề xuất bên nào và tự chuyển trưởng nhóm.
+  - **N2:** Chụp/bổ sung ảnh → người bán bấm "Gửi video đóng gói" → AI đề xuất đóng khiếu nại → nhân viên bấm "Duyệt đóng khiếu nại" và tích ô → người mua thấy căn cứ và nút "Yêu cầu xem xét lại".
 - **Ảnh chụp màn hình có đánh số:**
   - *(Chèn ảnh 1 & 2 tại đây)*
   - **Chú thích các điểm đánh số:**
     - **[1]:** Thể hiện gì · Nguyên tắc HAX/PAIR nào · Mức tự chủ nào.
     - **[2]:** ...
-- **Quyết định thiết kế giao diện (hiển thị độ chắc/bằng chứng & điều khiển mức tự chủ):**
-  - *Đã nghĩ tới cách nào khác:*
-  - *Vì sao chọn cách này & loại cách kia:*
+- **Quyết định thiết kế giao diện (hiển thị độ chắc/bằng chứng & điều khiển mức tự chủ):** số trong ngoặc vuông là số chú thích trên prototype (bật ô "Hiện số chú thích").
+
+| # | Quyết định | Cách đã chọn *(chỗ trên prototype)* | Đã nghĩ tới cách nào khác | Vì sao chọn cách này & vì sao loại cách kia |
+|---|---|---|---|---|
+| 1 | Hiện độ chắc và căn cứ | Nhãn bằng lời nói rõ chỗ chưa chắc **[1]**, kèm **một** thẻ đối chiếu căn cứ dùng chung cho cả ba màn **[2]** | (a) Phần trăm tin cậy, ví dụ "AI chắc 72%"; (b) đèn xanh/vàng/đỏ; (c) mỗi bên một bản tóm tắt riêng do AI viết | Ở N1, cái chắc (mô tả đã bị sửa) và cái chưa chắc (tai nghe có ANC không) là hai chuyện; một con số gộp làm mất điều đó, và người mua dễ đọc 72% thành "sắp được hoàn". Đèn màu cũng vậy, lại gợi cảm giác "đỏ là mình thua". Mỗi bên một bản tóm tắt thì dễ lệch: AI có thể viết cho người mua "shop đã sửa mô tả" nhưng viết cho shop "khách nhầm". Một thẻ chung giữ trung lập. |
+| 2 | Nút hoàn tiền / phạt shop ở màn người mua | **Không có nút.** Người mua thấy dải trạng thái **[4]**: chưa có quyết định · ai quyết · tiền đang do sàn giữ | (a) Nút "Hoàn tiền" màu xám kèm "chưa đủ điều kiện"; (b) nút "Yêu cầu hoàn tiền ngay" gửi vào hàng chờ | Nút xám gợi ý "ép đủ thì bấm được", đúng chỗ khách doạ ở N2 sẽ nhắm vào. Chữ "ngay" là lời hứa sai so với §4.4. Việc cần duyệt thì nút nằm ở màn người duyệt; việc cấm (`phat_shop`) thì không có nút ở đâu cả **[9]**. |
+| 3 | Nút duyệt của nhân viên | Nút **khoá** tới khi đủ điều kiện ở §4.1, danh sách ✓/✗ nằm ngay trên nút; bấm xong còn hộp xác nhận phải tích ô, nói rõ "không đảo lại được" **[8]** | (a) Nút luôn bật, kèm cảnh báo đỏ; (b) duyệt hàng loạt nhiều hồ sơ | Khi nhân viên quá tải và đã có đề xuất AI soạn sẵn, cảnh báo dễ bị bấm qua. Khoá theo điều kiện chặn đúng N3 (hoàn tiền trước khi hàng về) và N1 (thiếu bản lưu mô tả lúc đặt). Duyệt hàng loạt bỏ qua bước xem từng bảng đối chiếu. |
+| 4 | Hai hướng quyết định | Hai thẻ "Hoàn tiền" và "Đóng khiếu nại" đặt cạnh nhau, cùng kích cỡ, cùng màu nút. Đề xuất của AI chỉ là viền và nhãn "AI đề xuất" **[7][8]** | Chỉ hiện một nút theo đề xuất của AI ("Đồng ý với AI") | Một nút theo AI biến nhân viên thành người bấm hộ, mất ý nghĩa của mức Cần người duyệt. Hai hướng ngang nhau giữ trung lập, khớp §4.1 (hai chiều cùng mức duyệt). |
+| 5 | Hoàn tác việc AI tự làm | Nút "Huỷ đề xuất" trên thẻ đề xuất **[7]**; "Trả về luồng thường" khi hồ sơ đã chuyển trưởng nhóm; "Sửa thông tin" ở màn người mua **[5]** | Đồng hồ "hoàn tác trong 10 phút" như prototype mẫu | Đề xuất chưa đụng tới tiền nên huỷ lúc nào cũng được; đồng hồ chỉ tạo áp lực giả. Đồng hồ được dành cho chỗ thời gian thật sự quan trọng: hạn phản hồi 24 giờ của người bán **[6]**. |
+| 6 | Lời doạ ở N2 | Màn nhân viên giữ lời nhắn trong mục thu gọn, gắn nhãn "không tính là căn cứ" **[9]**; màn người bán không hiện | (a) Ẩn hẳn; (b) hiện nguyên văn trong bảng căn cứ | Ẩn hẳn thì nhân viên thiếu ngữ cảnh khi khách quay lại hỏi. Để trong bảng căn cứ thì vô tình biến lời doạ thành bằng chứng (rubric riêng #4). |
+| 7 | Bố cục cho demo | Ba màn đặt cạnh nhau, có dòng "Bước tiếp" | (a) Tab chuyển qua lại giữa các màn; (b) chỉ làm màn người mua | Demo bắt buộc hỏi "trợ lý không chắc thì hai bên thấy gì, và ai quyết". Đặt cạnh nhau thì sau mỗi lần bấm thấy cả ba phía đổi cùng lúc. Chỉ có màn người mua thì không chỉ ra được người duyệt. |
+| 8 | Ca lạ | Ô nhắn tự do kèm luật; tin không khớp luật thì hỏi lại một câu và đưa nút "Gặp nhân viên" **[10]** | Chỉ cho chọn menu cứng, như sản phẩm thật hôm nay | Menu cứng không trả lời được ca lạ ở demo. Đoán khi không khớp luật thì vi phạm rubric riêng #2 ("hỏi lại một câu, không đoán"). |
+
+- **Cách thể hiện không có trong prototype mẫu:** thẻ đối chiếu dùng chung cho cả ba phía; hai thẻ quyết định đối xứng với nút khoá theo điều kiện; màn người bán có đồng hồ hạn phản hồi và ẩn thông tin liên hệ của người mua.
 
 ---
 
