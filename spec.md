@@ -5,8 +5,8 @@
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
 | Nguyễn Văn Nhi | 2A202603697 |  |
-|  |  |  |
-|  |  |  |
+|Vũ Quang Minh|2A202603657|  |
+|Nguyễn Công Quân|2A202603675|  |
 
 ---
 
