@@ -240,10 +240,21 @@
   - **N1, nhánh tranh chấp:** người bán bấm "Không đồng ý · gửi bằng chứng" → AI không đề xuất bên nào và tự chuyển trưởng nhóm.
   - **N2:** Chụp/bổ sung ảnh → người bán bấm "Gửi video đóng gói" → AI đề xuất đóng khiếu nại → nhân viên bấm "Duyệt đóng khiếu nại" và tích ô → người mua thấy căn cứ và nút "Yêu cầu xem xét lại".
 - **Ảnh chụp màn hình có đánh số:**
-  - *(Chèn ảnh 1 & 2 tại đây)*
-  - **Chú thích các điểm đánh số:**
-    - **[1]:** Thể hiện gì · Nguyên tắc HAX/PAIR nào · Mức tự chủ nào.
-    - **[2]:** ...
+  - **Màn hình 1 — Kịch bản N1 (Shop sửa mô tả sau khi bán: Đối chiếu bản lưu lúc đặt, đề xuất của AI & chốt duyệt 2 bước):**
+    ![Màn hình 1 — Ca N1 có đánh số chú thích](./prototype/screen-1.png)
+  - **Màn hình 2 — Kịch bản N2 (Người bán đúng, khách doạ bóc phốt: Thu hẹp bằng chứng màu sắc, lọc lời doạ khỏi căn cứ):**
+    ![Màn hình 2 — Ca N2 có đánh số chú thích](./prototype/screen-2.png)
+  - **Chú thích các điểm đánh số (khớp với huy hiệu `[1]` → `[10]` trên Prototype):**
+    - **[1] Nhãn giới hạn độ chắc của AI:** Thể hiện trạng thái *"Thông tin sản phẩm đã thay đổi — chưa thể kết luận"* (N1) và *"Chưa đủ căn cứ — cần đối chiếu màu"* (N2) thay vì dùng con số % tự tin giả tạo · **Nguyên tắc:** **HAX G2** (Làm rõ hệ thống làm tốt đến đâu) · **Mức tự chủ:** AI chỉ thông báo trạng thái, chưa tự kết luận thắng/thua.
+    - **[2] Thẻ đối chiếu căn cứ dùng chung ở cả 3 màn:** Hiển thị song song *Bản lưu mô tả lúc đặt (05/11) ↔ Mô tả hiện tại (shop sửa 10/11)* ở N1 và *Màu đã đặt ↔ Tem phân loại ↔ Ảnh thực tế* ở N2 cho cả Người mua, Người bán và Nhân viên sàn · **Nguyên tắc:** **HAX G11 + PAIR Explainability & Trust** (Giải thích vì sao & hiển thị căn cứ để các bên tự kiểm) · **Mức tự chủ:** `xem_mo_ta_luc_dat` (**Tự làm** — chỉ đọc dữ liệu lịch sử đơn).
+    - **[3] Danh sách bằng chứng đã nhận & Ô "Còn thiếu đúng 1 mục":** Liệt kê các ảnh/video hệ thống đã lưu (để khách không phải gửi lại) và đóng khung viền đứt đúng 1 bằng chứng cần bổ sung (video kiểm tra ANC ở N1; ảnh chụp dưới ánh sáng tự nhiên cạnh vật trắng ở N2) · **Nguyên tắc:** **HAX G10** (Thu hẹp phạm vi khi nghi ngờ) · **Mức tự chủ:** `yeu_cau_bang_chung` (**Tự làm** kèm Luật 1 & 2: chỉ xin đúng mục thiếu, tối đa 1 lượt).
+    - **[4] Dải trạng thái lời hứa & giữ tiền trung gian (Escrow):** Hiển thị rõ *"Chưa có quyết định hoàn tiền hoặc bác khiếu nại · Người quyết: nhân viên sàn · Tiền đang do sàn giữ"* · **Nguyên tắc:** **HAX G1** (Làm rõ hệ thống làm được gì) + **Lời hứa §4.4** · **Mức tự chủ:** Chặn kỳ vọng sai rằng AI có quyền tự giải ngân hoặc tự đóng khiếu nại.
+    - **[5] Cụm nút hành động của người mua & Đường sang người thật:** Gồm nút *"Sửa thông tin"* (đổi lý do khiếu nại nếu AI ghi nhận lệch) và nút *"Gặp nhân viên"* / *"Yêu cầu xem xét lại"* chuyển thẳng hồ sơ kèm lịch sử cho trưởng nhóm · **Nguyên tắc:** **HAX G9** (Hỗ trợ sửa chữa dễ dàng) + **PAIR Errors & Graceful Failure** (Luôn có đường lui sang người thật mà không phải kể lại từ đầu) · **Mức tự chủ:** Hoàn tác việc AI tự ghi nhận + `chuyen_truong_nhom` (**Tự làm**, trưởng nhóm có nút *"Trả về luồng thường"* để đảo lại).
+    - **[6] Khung hạn phản hồi 24 giờ trên màn Người bán & Ẩn thông tin cá nhân:** Hiển thị đồng hồ đếm ngược 24 giờ để người bán gửi bằng chứng phản biện trước khi bất kỳ khoản tiền nào được chuyển, đồng thời ghi rõ *"Số điện thoại và địa chỉ của người mua: đã ẩn"* · **Nguyên tắc:** **Rubric riêng T4 #3 & #6** (Hai bên cùng được nghe & Bảo vệ dữ liệu cá nhân) · **Mức tự chủ:** `yeu_cau_bang_chung` phía người bán (**Tự làm**) + Chặn lộ PII ở tầng dữ liệu (M3).
+    - **[7] Thẻ "Đề xuất của AI" trên màn Nhân viên sàn:** Khi đủ bằng chứng 2 bên, AI tóm tắt lý do, nêu rõ điểm chưa chắc và tạo thẻ đề xuất kèm nút **"Huỷ đề xuất"** (và *"Khôi phục đề xuất"*) · **Nguyên tắc:** **HAX G8 / G9** (Gạt bỏ hoặc hoàn tác đề xuất của AI dễ dàng) · **Mức tự chủ:** `de_xuat_hoan_tien` / `de_xuat_tu_choi` (**Tự làm + hoàn tác được**, chưa đụng tới tiền).
+    - **[8] Hai thẻ quyết định đối xứng, điều kiện mở khoá `✓/✗` & Hộp xác nhận 2 lớp:** Đặt ngang nhau 2 hướng (*Hoàn tiền cho người mua* vs *Đóng khiếu nại, tiền về người bán*), nút bấm bị **khoá (`disabled`)** tới khi đủ 4 điều kiện `✓` (có bản lưu lúc đặt, đã nghe 2 bên, kho đã nhận hàng trả về), khi bấm hiện Modal cảnh báo *"Không đảo lại được"* bắt tích ô xác nhận · **Nguyên tắc:** **HAX G16** (Thông báo rõ hậu quả của hành động) + **PAIR Trust** · **Mức tự chủ:** `duyet_hoan_tien` / `duyet_tu_choi` (**Cần người duyệt**).
+    - **[9] Bảng giới hạn quyền của AI & Hộp thu gọn lọc lời đe doạ:** Mục thu gọn màu đỏ ở N2 gắn nhãn *"Lời nhắn có đe doạ đăng bài: không tính là căn cứ (không hiện cho người bán)"*, và bảng cuối màn nhân viên khẳng định `phat_shop` không có nút bấm ở cả 3 màn · **Nguyên tắc:** **HAX G1** + **Rubric riêng T4 #4 & #5** · **Mức tự chủ:** `phat_shop` (**Cấm**).
+    - **[10] Thanh chip & Ô nhập tự do thử "Ca lạ":** Cho phép bấm nhanh hoặc gõ tin nhắn bất kỳ (đòi SĐT shop, tố hàng fake đòi khoá shop, đòi hoàn tiền ngay, trả hàng do đổi ý, hoặc tin tối nghĩa `abc xyz`); khi không khớp luật, AI hỏi lại đúng 1 câu làm rõ và mời gặp nhân viên thay vì đoán · **Nguyên tắc:** **HAX G10** (Thu hẹp khi mơ hồ, không đoán mò) · **Mức tự chủ:** Giữ nguyên ranh giới tự chủ trước mọi input bất ngờ.
 - **Quyết định thiết kế giao diện (hiển thị độ chắc/bằng chứng & điều khiển mức tự chủ):** số trong ngoặc vuông là số chú thích trên prototype (bật ô "Hiện số chú thích").
 
 | # | Quyết định | Cách đã chọn *(chỗ trên prototype)* | Đã nghĩ tới cách nào khác | Vì sao chọn cách này & vì sao loại cách kia |
@@ -263,14 +274,30 @@
 
 ## §6. Tốt là gì *(chặng 6 — nhẹ)*
 
-- **3 tiêu chí Pass/Fail chấm được:**
-  1. **Tiêu chí 1:**
-  2. **Tiêu chí 2:**
-  3. **Tiêu chí 3:**
-- **Chấm thử trên 2 kịch bản đắt nhất:**
-  - *Kịch bản đắt nhất #1:*
-  - *Kịch bản đắt nhất #2:*
+- **3 tiêu chí Pass/Fail chấm được (người ngoài đọc chấm ra cùng kết quả):**
+  1. **Tiêu chí 1 — Đúng nguồn sự thật & Không tự kết luận sớm (Pass/Fail):**
+     - **Pass khi:** Hệ thống bắt buộc đọc và hiển thị **bản lưu mô tả lúc đặt hàng (`xem_mo_ta_luc_dat`)** trên thẻ đối chiếu chung, nêu rõ đúng 1 mục bằng chứng còn thiếu (`yeu_cau_bang_chung`), và **không** tự gọi `soan_hoan_tien` hay `tu_choi_khieu_nai` khi chưa qua bước người duyệt.
+     - **Fail khi:** Dùng mô tả hiện tại đã bị sửa để bác khiếu nại, đòi gửi lại toàn bộ ảnh đã nộp, hoặc tự động hoàn tiền/đóng khiếu nại.
+  2. **Tiêu chí 2 — Trung lập hai chiều & Chặn thao túng bằng lời đe doạ / hoàn trước khi trả hàng (Pass/Fail):**
+     - **Pass khi:** Lời đe doạ (bóc phốt, đánh giá 1 sao) được tách khỏi bảng căn cứ và ẩn khỏi màn người bán; cả 2 nút `duyet_hoan_tien` và `duyet_tu_choi` đều bị khoá (`disabled`) cho tới khi người bán đã phản hồi (hoặc hết hạn 24 giờ) và kho xác nhận đã nhận hàng trả về (với trường hợp hoàn tiền).
+     - **Fail khi:** Hoàn tiền ngay vì lời đe doạ, giải ngân trước khi người mua gửi trả hàng về kho, hoặc đóng khiếu nại trước khi hết hạn bổ sung.
+  3. **Tiêu chí 3 — Giữ đúng biên thẩm quyền & Luôn có đường lui sang người thật (Pass/Fail):**
+     - **Pass khi:** Không có nút `phat_shop` trên bất kỳ màn hình nào, không hứa xử phạt shop trong câu chữ, ẩn toàn bộ SĐT/địa chỉ cá nhân giữa hai bên, và luôn hiển thị nút **"Sửa thông tin"** + **"Gặp nhân viên"** (chuyển kèm nguyên vẹn lịch sử và bảng đối chiếu qua `chuyen_truong_nhom` để khách không phải kể lại).
+     - **Fail khi:** Lộ SĐT/địa chỉ của một bên, hứa phạt/khoá shop, hoặc đẩy người dùng vào ngõ cụt không có nút chuyển nhân viên.
+
+- **Chấm thử thiết kế của nhóm trên 2 kịch bản đắt nhất:**
+  - **Kịch bản đắt nhất #1 — N1 (Shop sửa mô tả từ ANC sang Thụ động sau khi bán):** **Đạt 3/3 (Pass cả 3 tiêu chí).**
+    - *TC1 (Pass):* Thẻ `[2]` hiển thị song song bản lưu lúc đặt (`05/11: ANC`) và bản hiện tại (`10/11: Thụ động`); ô `[3]` giữ 2 ảnh cũ và chỉ xin thêm 1 video kiểm tra ANC; dải `[4]` giữ khiếu nại mở.
+    - *TC2 (Pass):* Nút `Duyệt hoàn tiền` `[8]` trên màn nhân viên bị khoá cho tới khi người bán phản hồi và kho xác nhận đã nhận lại tai nghe trả về.
+    - *TC3 (Pass):* Ẩn thông tin liên hệ trên màn người bán; khi hai bên gửi video mâu thuẫn (nhánh shop phản đối), AI không tự chọn bên mà tự động gọi `chuyen_truong_nhom` chuyển trưởng nhóm kèm toàn bộ hồ sơ.
+  - **Kịch bản đắt nhất #2 — N2 (Khách doạ bóc phốt khi tem khớp màu "Trắng kem"):** **Đạt 3/3 (Pass cả 3 tiêu chí).**
+    - *TC1 (Pass):* Nhãn `[1]` báo rõ *"Chưa đủ căn cứ — cần đối chiếu màu"*, thẻ `[2]` chỉ ra tem khớp đơn nhưng màu ảnh chụp dưới đèn vàng có thể lệch, ô `[3]` chỉ xin 1 ảnh dưới ánh sáng tự nhiên cạnh vật trắng.
+    - *TC2 (Pass):* Lời doạ bóc phốt hội nhóm 500k thành viên bị đưa vào hộp thu gọn `[9]` (*"không tính là căn cứ"*) và không hiện cho shop; người bán vẫn có đủ 24 giờ `[6]` gửi video đóng gói tự bảo vệ mình.
+    - *TC3 (Pass):* Sau khi nhân viên duyệt đóng khiếu nại dựa trên video đóng gói của shop, màn người mua vẫn có nút **"Yêu cầu xem xét lại"** `[5]` để kháng nghị lên trưởng nhóm nếu có bằng chứng mới.
+
 - **Lỗi còn lại chưa sửa được:**
+  1. **Chất lượng bằng chứng vật lý ngoài đời thực (gian lận tinh vi):** Nếu người mua cố tình chỉnh màu ảnh (photoshop) hoặc quay video trên một chiếc tai nghe khác cùng model bị hỏng, hay người bán quay video đóng gói hàng thật nhưng tráo kiện hàng lúc giao shipper, đối chiếu qua ảnh/video trên chat vẫn không phát hiện được — bắt buộc phải dựa vào khâu đồng kiểm vật lý tại kho trả hàng của sàn.
+  2. **Độ trễ ở khâu nhân viên duyệt khi quá tải đợt sale lớn:** Vì cả `duyet_hoan_tien` và `duyet_tu_choi` đều đặt ở mức **Cần người duyệt** để bảo toàn tính trung lập, vào các ngày cao điểm (11/11, 12/12) hàng chờ duyệt của nhân viên có thể bị ứ đọng quá 24 giờ, khiến cả người mua đúng lẫn người bán đúng phải chờ giải ngân lâu hơn dù AI đã soạn sẵn bảng đối chiếu.
 
 ---
 
