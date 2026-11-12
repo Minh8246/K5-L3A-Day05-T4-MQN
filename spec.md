@@ -18,17 +18,10 @@
 |---|---|---|---|---|
 | Trò chuyện với Shopee | Người mua | Báo "hàng nhận không đúng mô tả" | Tự hướng dẫn gửi yêu cầu trả hàng hoàn tiền, xin thêm bằng chứng, hay chuyển nhân viên | Người mua biết đúng bước tiếp theo, và người bán không bị xử thua khi họ đúng |
 
-- **Bối cảnh & Cái giá khi sai (5 câu hỏi nền tảng Chặng 1):**
-  - **AI đang giúp ai làm việc gì?** Giúp **người mua** đang khiếu nại "hàng nhận không đúng mô tả" biết đúng bước tiếp theo (gửi yêu cầu trả hàng/hoàn tiền, bổ sung đúng bằng chứng còn thiếu, hoặc gặp nhân viên sàn), đồng thời bảo vệ **người bán** có cơ hội phản hồi và không bị xử thua oan khi họ giao đúng hàng.
-  - **Hoàn sai (`soan_hoan_tien` sai) thì ai mất gì?** **Người bán** mất tiền (và có thể mất luôn hàng hoặc nhận hàng trả về đã qua sử dụng), mất uy tín và niềm tin vào sự trung lập của sàn; quyết định này **rất khó đảo lại** vì tiền đã về ví/tài khoản người mua.
-  - **Từ chối sai (`tu_choi_khieu_nai` sai) thì ai mất gì?** **Người mua** mất tiền oan, phải giữ món hàng sai mô tả không dùng được; khiếu nại bị đóng khiến tiền giải ngân về ví người bán, **rất khó thu hồi** và làm người mua mất niềm tin vào sàn.
-  - **Tool nguy hiểm nhất là tool nào?** Hai tool quyết định dòng tiền một chiều là `soan_hoan_tien` và `tu_choi_khieu_nai` (tiền đã chuyển đi, rất khó đòi lại), cùng với `phat_shop` (trừ điểm uy tín/khoá toàn bộ hoạt động kinh doanh của shop, vượt thẩm quyền của luồng khiếu nại đơn lẻ).
-
-- **Những việc tính năng chắc chắn KHÔNG làm (kèm lý do):**
-  1. **Không tự kết luận hàng giả hoặc tự xử phạt/khoá shop (`phat_shop`):** Vì việc giám định hàng giả và chế tài shop thuộc thẩm quyền của bộ phận chuyên trách; nếu AI tự kết luận hoặc xử phạt sai sẽ gây thiệt hại nghiêm trọng cho toàn bộ hoạt động kinh doanh của shop và rất khó khắc phục.
-  2. **Không chia sẻ số điện thoại hoặc địa chỉ cá nhân giữa người mua và người bán:** Vì đây là dữ liệu cá nhân nhạy cảm không cần thiết cho việc đối chiếu bằng chứng, việc tiết lộ vi phạm quyền riêng tư và dễ dẫn đến quấy rối, đe doạ ngoài sàn.
-  3. **Không ra quyết định hoàn tiền hay từ chối dựa trên lời đe doạ (bóc phốt, nghỉ bán), cảm xúc hoặc lịch sử của một bên:** Vì cảm xúc, áp lực dư luận hay uy tín quá khứ không phải là bằng chứng khách quan cho đơn hàng hiện tại; quyết định phải dựa trên đối chiếu **mô tả lúc đặt hàng (order snapshot)** và bằng chứng thực tế của cả hai bên.
-  4. **Không xử lý các khiếu nại ngoài phạm vi "hàng nhận không đúng mô tả" (như thất lạc bưu kiện, chậm giao hàng, lỗi thanh toán ví):** Vì mỗi loại sự cố có nguồn dữ liệu đối soát (đơn vị vận chuyển, cổng thanh toán) và quy trình bồi hoàn riêng biệt, không thể dùng chung luồng kiểm tra mô tả sản phẩm.
+- **3 việc tính năng KHÔNG làm (kèm lý do):**
+  1. **Không tự kết luận hàng giả hoặc tự xử phạt shop (`phat_shop`):** Vì việc này cần bộ phận chuyên trách thẩm định và xử phạt sai sẽ ảnh hưởng nghiêm trọng đến toàn bộ hoạt động của shop.
+  2. **Không chia sẻ số điện thoại hoặc địa chỉ giữa người mua và người bán:** Vì đây là dữ liệu cá nhân nhạy cảm không cần thiết cho việc xử lý khiếu nại trên sàn.
+  3. **Không quyết định dựa trên lời đe doạ, cảm xúc hoặc lịch sử của một bên:** Vì chúng không phải là bằng chứng khách quan đối chiếu cho đơn hàng hiện tại.
 
 ---
 
