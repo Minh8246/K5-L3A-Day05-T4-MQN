@@ -190,18 +190,24 @@
 - **Cách nhóm chốt (kèm luật thêm hoặc tách tool thành 2 bước nếu có):** Nhóm chọn **Cần người duyệt** và tách tool thành hai bước. AI được **Tự làm** với `de_xuat_hoan_tien`: đối chiếu dữ liệu, ghi rõ điểm chưa chắc và đưa hồ sơ vào hàng chờ. Chỉ nhân viên được gọi `duyet_hoan_tien` để chuyển tiền. Nút duyệt chỉ mở khi có bản mô tả lúc đặt, người bán đã phản hồi hoặc hết hạn 24 giờ, và hàng trả về đã được xác nhận nếu cần. Nếu quá 24 giờ chưa duyệt, hồ sơ chuyển trưởng nhóm; hệ thống không tự hoàn tiền. Cách này giữ được tốc độ chuẩn bị của AI nhưng đặt chốt người ở đúng bước khó đảo ngược.
 
 ### 4.3 Thử mức tự chủ trên 3 kịch bản (2 kịch bản đắt nhất + 1 kịch bản bình thường)
-1. **Kịch bản đắt nhất #1:**
-   - *Cái sai ở §2 có bị chặn không?*
-   - *Còn việc nào AI vẫn làm khi lẽ ra phải hỏi?*
-   - *Người dùng bình thường có phải chờ vô ích không?*
-2. **Kịch bản đắt nhất #2:**
-   - *Cái sai ở §2 có bị chặn không?*
-   - *Còn việc nào AI vẫn làm khi lẽ ra phải hỏi?*
-   - *Người dùng bình thường có phải chờ vô ích không?*
-3. **Kịch bản bình thường:**
-   - *Cái sai ở §2 có bị chặn không?*
-   - *Còn việc nào AI vẫn làm khi lẽ ra phải hỏi?*
-   - *Người dùng bình thường có phải chờ vô ích không?*
+
+1. **Kịch bản đắt nhất #1 — N1 (Shop sửa mô tả từ "Chống ồn chủ động ANC" thành "Chống ồn thụ động" sau khi bán):**
+   - *Luồng chạy theo mức đã đặt:* AI tự gọi `xem_mo_ta_luc_dat` (**Tự làm**), phát hiện sự khác biệt giữa bản lưu lúc đặt ("ANC") và mô tả hiện tại ("Thụ động"), hiển thị thẻ so sánh cho cả hai bên và tự gọi `yeu_cau_bang_chung` (**Tự làm** theo Luật 1 & 2) để xin người mua ảnh model/video test ANC và báo người bán phản hồi trong 24 giờ.
+   - *Cái sai ở §2 có bị chặn không?* **Có.** Lỗi AI đọc mô tả hiện tại rồi tự gọi `tu_choi_khieu_nai` bị chặn hai tầng: (1) AI bắt buộc đọc qua `xem_mo_ta_luc_dat`, và (2) bước đóng khiếu nại `duyet_tu_choi` nằm ở mức **Cần người duyệt** (AI không có quyền tự đóng khiếu nại; nếu thiếu bản lưu lúc đặt thì nút duyệt cũng bị khoá và tự chuyển người).
+   - *Còn việc nào AI vẫn làm khi lẽ ra phải hỏi?* **Không.** AI chỉ tự đọc dữ liệu lịch sử đơn và gửi mẫu xin đúng bằng chứng còn thiếu (việc đảo lại được, không đụng tới tiền); việc gửi yêu cầu khiếu nại chính thức vẫn do người mua bấm xác nhận.
+   - *Người dùng bình thường có phải chờ vô ích không?* **Không.** Ngay lập tức người mua thấy bảng đối chiếu xác nhận "lúc đặt đúng là ghi ANC" (giải toả bức xúc ngay) và biết chính xác cần quay thêm 1 video test ANC trong lúc chờ người bán phản hồi, không phải ngồi chờ nhân viên sàn vào đọc tin nhắn mới biết bước tiếp theo.
+
+2. **Kịch bản đắt nhất #2 — N2 (Khách doạ bóc phốt đòi hoàn tiền trong 5 phút khi tem trên ảnh khớp màu "Trắng kem"):**
+   - *Luồng chạy theo mức đã đặt:* AI đối chiếu ảnh thấy tem ghi "Trắng kem" khớp bản lưu lúc đặt nhưng màu thực tế chưa rõ do ánh sáng; AI tự gọi `yeu_cau_bang_chung` (**Tự làm**) hướng dẫn người mua chụp 1 ảnh dưới ánh sáng tự nhiên cạnh vật trắng và mở thời hạn 24 giờ cho người bán phản hồi. Nếu sau 1 lượt bổ sung mà hai bên vẫn mâu thuẫn (Luật 2), AI tự gọi `chuyen_truong_nhom` (**Tự làm**).
+   - *Cái sai ở §2 có bị chặn không?* **Có.** Lỗi AI chiều theo lời doạ bóc phốt mà gọi `soan_hoan_tien` ngay lập tức bị chặn hoàn toàn vì bước giải ngân `duyet_hoan_tien` bắt buộc **Cần người duyệt**, và nút duyệt trên màn hình nhân viên bị khoá khi người bán chưa phản hồi (hoặc chưa hết hạn 24 giờ).
+   - *Còn việc nào AI vẫn làm khi lẽ ra phải hỏi?* **Không.** AI không tự hoàn tiền và cũng không tự bác khiếu nại dựa trên tem bao bì; nếu người mua thấy AI ghi nhận chưa đúng lý do khiếu nại, họ vẫn có nút **"Sửa thông tin"** hoặc **"Gặp nhân viên"** ngay trên màn hình.
+   - *Người dùng bình thường có phải chờ vô ích không?* **Không.** Người mua nhận được hướng dẫn chụp lại ảnh đối chiếu màu ngay lập tức; người bán có đúng 24 giờ để gửi video đóng gói tự bảo vệ mình; chỉ khi hai bên thực sự mâu thuẫn thì nhân viên mới phải can thiệp.
+
+3. **Kịch bản bình thường — N3 (Đặt áo size L nhận size M, có ảnh tem size M và tin nhắn shop thừa nhận gửi nhầm):**
+   - *Luồng chạy theo mức đã đặt:* AI tự gọi `xem_mo_ta_luc_dat` (**Tự làm**), xác nhận đơn đặt size L nhưng ảnh tem thực tế là size M và shop đã nhận lỗi; AI tự gọi `de_xuat_hoan_tien` (**Tự làm**) để tạo sẵn hồ sơ Trả hàng/Hoàn tiền và hướng dẫn người mua đóng gói gửi trả áo cho đơn vị vận chuyển. Khi hệ thống ghi nhận trạng thái hàng trả về hợp lệ, nhân viên bấm `duyet_hoan_tien` (**Cần người duyệt**) để giải ngân.
+   - *Cái sai ở §2 có bị chặn không?* **Có.** Lỗi AI thấy shop nhận nhầm liền giải ngân tiền ngay khi người mua chưa trả lại áo bị chặn bởi điều kiện mở khoá của `duyet_hoan_tien` (phải có xác nhận trạng thái hàng trả về mới mở nút duyệt chuyển tiền).
+   - *Còn việc nào AI vẫn làm khi lẽ ra phải hỏi?* **Không.** AI chỉ **soạn sẵn đề xuất** (`de_xuat_hoan_tien` — đảo lại được nếu huỷ), còn người mua vẫn là người bấm xác nhận tạo phiếu trả hàng và chọn phương thức gửi trả.
+   - *Người dùng bình thường có phải chờ vô ích không?* **Không.** Nhờ tách `de_xuat_hoan_tien` sang mức **Tự làm**, người mua ở ca rõ ràng này không phải chờ nhân viên sàn duyệt mới được tạo phiếu trả hàng: họ nhận ngay hướng dẫn đóng gói gửi hàng trong vài giây, còn bước nhân viên bấm `duyet_hoan_tien` diễn ra song song ở khâu đối soát cuối nên không làm chậm trải nghiệm của khách.
 
 ### 4.4 Thay đổi lời hứa với người dùng
 - **Mức tự chủ đã đổi lời hứa nào với người dùng:**
