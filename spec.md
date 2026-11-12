@@ -178,10 +178,16 @@
 - **Không thêm tool nào đọc thông tin liên hệ (M3):** dữ liệu đơn đưa cho AI đã che số điện thoại và địa chỉ của cả hai bên, nên AI không có gì để lộ dù bị hỏi khéo.
 
 ### 4.2 Tool khó xếp nhất
-- **Tool:**
+- **Tool:** `soan_hoan_tien` — vì AI có thể đọc bằng chứng và chuẩn bị hồ sơ rất nhanh, nhưng nếu tool đồng thời giải ngân thì một kết luận sai sẽ chuyển tiền ngay và khó đảo lại.
 - **Mỗi thành viên ban đầu chọn gì:**
+  - **Nguyễn Văn Nhi — Tự làm có điều kiện:** AI được tự hoàn với đơn giá trị nhỏ hoặc khi người bán đã nhắn nhận lỗi, để người mua đúng không phải chờ nhân viên ở các ca rõ ràng như **N3**.
+  - **Vũ Quang Minh — Cần người duyệt:** AI chuẩn bị đề xuất, nhưng nhân viên phải xem bản mô tả lúc đặt, bằng chứng hai bên và trạng thái hàng trả về trước khi tiền được chuyển.
+  - **Nguyễn Công Quân — Cấm AI gọi bước giải ngân:** Dù đơn nhỏ hay bằng chứng có vẻ rõ, AI vẫn có thể hiểu sai lời nhắn hoặc bỏ sót điều kiện trả hàng; chỉ người có thẩm quyền mới được hoàn tiền.
 - **Cái giá của mỗi phía (trỏ về kịch bản ở §2):**
-- **Cách nhóm chốt (kèm luật thêm hoặc tách tool thành 2 bước nếu có):**
+  - Nếu chọn **Tự làm**, người mua đúng được xử lý nhanh hơn, nhưng ở **N2** AI có thể chiều theo lời doạ dù tem vẫn khớp đơn, hoặc ở **Q2** hiểu sai thông số 6 lít; người bán đúng mất tiền. Ở **N3**, hoàn trước khi xác nhận hàng trả về còn khiến shop mất cả tiền lẫn áo.
+  - Nếu chọn **Cần người duyệt**, người mua đúng phải chờ thêm tối đa khoảng 24 giờ và nhân viên có thêm hàng chờ, nhưng tiền vẫn đang được sàn tạm giữ và quyết định sai còn được chặn trước khi giải ngân.
+  - Nếu chọn **Cấm hoàn toàn**, tránh được việc AI trực tiếp chuyển tiền sai, nhưng nhân viên phải đọc lại hồ sơ từ đầu ở mọi ca; người mua chờ lâu và phần AI làm tốt như đối chiếu, tóm tắt bằng chứng bị bỏ phí.
+- **Cách nhóm chốt (kèm luật thêm hoặc tách tool thành 2 bước nếu có):** Nhóm chọn **Cần người duyệt** và tách tool thành hai bước. AI được **Tự làm** với `de_xuat_hoan_tien`: đối chiếu dữ liệu, ghi rõ điểm chưa chắc và đưa hồ sơ vào hàng chờ. Chỉ nhân viên được gọi `duyet_hoan_tien` để chuyển tiền. Nút duyệt chỉ mở khi có bản mô tả lúc đặt, người bán đã phản hồi hoặc hết hạn 24 giờ, và hàng trả về đã được xác nhận nếu cần. Nếu quá 24 giờ chưa duyệt, hồ sơ chuyển trưởng nhóm; hệ thống không tự hoàn tiền. Cách này giữ được tốc độ chuẩn bị của AI nhưng đặt chốt người ở đúng bước khó đảo ngược.
 
 ### 4.3 Thử mức tự chủ trên 3 kịch bản (2 kịch bản đắt nhất + 1 kịch bản bình thường)
 1. **Kịch bản đắt nhất #1:**
