@@ -55,39 +55,99 @@
 
 ## §3. Khi AI sai *(chặng 3)*
 
-### Kịch bản đắt nhất #1: [Tên kịch bản]
-- **AI nói gì (nguyên văn):**
-- **Người dùng thấy gì (ngoài câu chữ):**
-- **Bước người dùng làm tiếp (và chuyện gì xảy ra nếu họ không làm gì):**
-- **Ai được báo, sau bao lâu (và người đó thấy gì):**
-- **Quyết định phản ứng của AI (Hỏi lại / Trả lời kèm giới hạn / Dừng và chuyển người):**
-  - *Đã cân nhắc:*
-  - *Chọn:*
-  - *Vì sao chọn & Vì sao loại các cách kia:*
-- **Loại lỗi (Hệ thống / Người dùng / Ngữ cảnh):**
-  - *Phân loại & Vì sao cách nói, cách sửa đi theo loại đó:*
+### Kịch bản đắt nhất #1 — N1: Shop sửa mô tả sau khi bán
 
-### Kịch bản đắt nhất #2: [Tên kịch bản]
-- **AI nói gì (nguyên văn):**
-- **Người dùng thấy gì (ngoài câu chữ):**
-- **Bước người dùng làm tiếp (và chuyện gì xảy ra nếu họ không làm gì):**
-- **Ai được báo, sau bao lâu (và người đó thấy gì):**
-- **Quyết định phản ứng của AI (Hỏi lại / Trả lời kèm giới hạn / Dừng và chuyển người):**
-  - *Đã cân nhắc:*
-  - *Chọn:*
-  - *Vì sao chọn & Vì sao loại các cách kia:*
-- **Loại lỗi (Hệ thống / Người dùng / Ngữ cảnh):**
-  - *Phân loại & Vì sao cách nói, cách sửa đi theo loại đó:*
+- **Tin người dùng:** *"Lúc mình đặt cái tai nghe này shop ghi rõ 'Chống ồn chủ động ANC', giờ nhận về không có. Mình vừa vào lại trang sản phẩm thì thấy shop lén sửa thành 'Chống ồn thụ động' rồi!"*
 
-### Nguyên tắc HAX/PAIR áp dụng (2–3 nguyên tắc)
-1. **[Mã nguyên tắc — Tên]:** Trỏ vào câu chữ / vị trí cụ thể trên màn hình...
-2. **[Mã nguyên tắc — Tên]:** Trỏ vào câu chữ / vị trí cụ thể trên màn hình...
-3. **[Mã nguyên tắc — Tên]:** Trỏ vào câu chữ / vị trí cụ thể trên màn hình...
+- **AI nói gì (nguyên văn):**
+
+  > **Thông tin sản phẩm đã thay đổi sau khi bạn đặt hàng.** Bản mô tả được lưu lúc đặt ghi “Chống ồn chủ động ANC”, còn trang hiện tại ghi “Chống ồn thụ động”. Thay đổi này là một bằng chứng quan trọng, nhưng chưa đủ để xác nhận chiếc tai nghe bạn nhận không có ANC.
+  >
+  > Khiếu nại vẫn đang mở; hệ thống chưa hoàn tiền hoặc bác yêu cầu của bạn. Ảnh bạn đã gửi vẫn được giữ trong hồ sơ. Bạn chỉ cần bổ sung ảnh mã sản phẩm hoặc video thao tác kiểm tra chế độ ANC. Người bán cũng sẽ được xem cùng bộ bằng chứng và phản hồi.
+
+- **Người dùng thấy gì (ngoài câu chữ):**
+  1. Nhãn **“Thông tin sản phẩm đã thay đổi — chưa thể kết luận”**, không hiển thị phần trăm chắc chắn giả tạo.
+  2. Thẻ so sánh song song: **Mô tả lúc đặt: “ANC”** và **Mô tả hiện tại: “Chống ồn thụ động”**, kèm thời điểm của mỗi bản.
+  3. Danh sách bằng chứng đã nhận và đúng một mục còn thiếu: ảnh mã sản phẩm hoặc video thao tác kiểm tra chế độ ANC.
+  4. Trạng thái xử lý: **“Chưa có quyết định hoàn tiền hoặc bác khiếu nại”**; hồ sơ vẫn mở.
+  5. Các nút **“Bổ sung bằng chứng”** và **“Gặp nhân viên”**; không có nút tự động từ chối hay hoàn tiền.
+
+- **Bước người dùng làm tiếp (và chuyện gì xảy ra nếu họ không làm gì):**
+  - Người mua có thể bổ sung đúng bằng chứng còn thiếu hoặc chọn gặp nhân viên; không phải tải lại ảnh hệ thống đã nhận.
+  - Nếu người mua chưa làm gì, hồ sơ vẫn ở trạng thái chờ trong thời hạn hiển thị trên màn hình và hệ thống gửi một lời nhắc trước hạn; không tự gọi `tu_choi_khieu_nai` chỉ vì người mua chưa phản hồi ngay.
+  - Nếu không lấy được bản mô tả lúc đặt hoặc bằng chứng hai bên vẫn mâu thuẫn, hệ thống dừng quyết định và chuyển người xử lý.
+
+- **Ai được báo, sau bao lâu (và người đó thấy gì):**
+  - Người bán được báo **ngay sau khi người mua xác nhận gửi yêu cầu**, thấy bản mô tả lúc đặt, ảnh/video của người mua và đúng phần cần phản hồi; không thấy dữ liệu liên hệ riêng của người mua.
+  - Nhân viên được báo ngay nếu hệ thống không lấy được bản mô tả lúc đặt, hai bên đưa bằng chứng mâu thuẫn, hoặc hết thời hạn phản hồi mà chưa đủ căn cứ. Nhân viên thấy toàn bộ lịch sử, hai phiên bản mô tả và bằng chứng đã có để người mua không phải kể lại.
+  - Thời gian phản hồi giả định trong prototype là **24 giờ**; đây là số giả phục vụ bài lab, không phải chính sách Shopee thật.
+
+- **Quyết định phản ứng của AI (Hỏi lại / Trả lời kèm giới hạn / Dừng và chuyển người):**
+  - *Đã cân nhắc:* (1) hỏi lại người mua rồi tự quyết; (2) trả lời kèm giới hạn và tiếp tục thu bằng chứng hai phía; (3) dừng và chuyển nhân viên ngay.
+  - *Chọn:* **Trả lời kèm giới hạn**, giữ khiếu nại mở và xin đúng bằng chứng còn thiếu; **dừng và chuyển người** chỉ khi không lấy được bản mô tả lúc đặt hoặc bằng chứng vẫn mâu thuẫn.
+  - *Vì sao chọn:* Bản mô tả được lưu lúc đặt đã chứng minh nội dung thay đổi nhưng chưa tự chứng minh sản phẩm nhận được thiếu ANC. AI có thể làm phần rẻ và sửa được là trình bày nguồn, giữ hồ sơ và xin bằng chứng; quyết định hoàn tiền hoặc bác khiếu nại phải chờ đủ căn cứ.
+  - *Vì sao loại hỏi lại rồi tự quyết:* Lời kể của người mua không thay thế được bản mô tả lúc đặt và phản hồi của người bán.
+  - *Vì sao loại chuyển người ngay trong mọi ca:* Khi snapshot đọc được và người mua chỉ thiếu một bằng chứng cụ thể, chuyển ngay làm hàng chờ dài mà chưa tạo thêm giá trị. Tuy nhiên, chuyển người là đường lui bắt buộc khi nguồn sự thật bị thiếu hoặc xung đột không giải được.
+  - *Vì sao không hoàn hoặc từ chối ngay:* Hoàn ngay có thể xử thua người bán khi tai nghe thật sự có ANC; từ chối ngay bằng mô tả hiện tại xử thua người mua vì shop đã sửa nội dung sau bán.
+
+- **Loại lỗi (Hệ thống / Người dùng / Ngữ cảnh):**
+  - *Phân loại:* **Lỗi hệ thống/nguồn sự thật** nếu AI đọc mô tả hiện tại thay vì bản mô tả được lưu lúc đặt.
+  - *Vì sao cách nói đi theo loại lỗi:* AI phải nói rõ hai phiên bản dữ liệu và thừa nhận giới hạn của hệ thống, không đổ lỗi rằng người mua “nhớ nhầm”.
+  - *Vì sao cách sửa đi theo loại lỗi:* Hệ thống phải bắt buộc lấy bản mô tả lúc đặt và chặn quyết định hoàn tiền hoặc bác khiếu nại khi bản này bị thiếu; yêu cầu người mua viết lại câu không thể sửa nguồn dữ liệu sai.
+
+### Kịch bản đắt nhất #2 — N2: Khách doạ bóc phốt khi tem khớp đơn nhưng màu thực tế chưa rõ
+
+- **Tin người dùng:** *"Shop giao sai màu trắng kem thành màu trắng tinh rồi! Hoàn tiền ngay trong 5 phút không tôi đăng bài bóc phốt lên hội nhóm 500k thành viên cho sập tiệm luôn!"*
+
+- **AI nói gì (nguyên văn):**
+
+  > Mình hiểu bạn muốn được xử lý nhanh. Yêu cầu này sẽ được xem xét dựa trên thông tin của đơn hàng và bằng chứng từ cả hai bên.
+  >
+  > Hiện tem phân loại trong ảnh ghi **“Trắng kem”**, khớp với màu bạn đã đặt; tuy nhiên màu trong ảnh có thể thay đổi theo ánh sáng nên **chưa đủ căn cứ kết luận người mua hay người bán sai**. Mình chưa hoàn tiền và cũng chưa đóng khiếu nại.
+  >
+  > Để kiểm tra đúng điểm còn thiếu, bạn vui lòng chụp sản phẩm dưới ánh sáng tự nhiên, đặt cạnh một vật màu trắng làm mốc. Người bán sẽ được xem cùng bộ bằng chứng và có 24 giờ để phản hồi.
+
+- **Người dùng thấy gì (ngoài câu chữ):**
+  1. Nhãn **“Chưa đủ căn cứ — cần đối chiếu màu”**.
+  2. Thẻ căn cứ: màu đã đặt **Trắng kem**; tem nhận được **Trắng kem**; ảnh màu thực tế được đánh dấu **có thể thay đổi do ánh sáng**.
+  3. Hướng dẫn minh hoạ cách chụp dưới ánh sáng tự nhiên và danh sách ảnh hệ thống đã nhận.
+  4. Đồng hồ thời hạn phản hồi của người bán và trạng thái **“Chưa có quyết định hoàn tiền hoặc bác khiếu nại”**.
+  5. Nút **“Chụp/bổ sung ảnh”**, **“Sửa thông tin”** và **“Gặp nhân viên”**; ở bước này không hiển thị nút **“Hoàn tiền ngay”** hoặc **“Phạt shop”**.
+
+- **Bước người dùng làm tiếp (và chuyện gì xảy ra nếu họ không làm gì):**
+  - Người mua bổ sung một ảnh đúng hướng dẫn thay vì gửi lại toàn bộ hồ sơ.
+  - Nếu không bổ sung ngay, khiếu nại vẫn mở đến thời hạn hiển thị và có lời nhắc trước hạn; lời đe doạ không làm thay đổi thứ tự hay kết quả xử lý.
+  - Sau khi hai bên phản hồi, nếu ảnh vẫn không đủ phân biệt “trắng kem” và “trắng tinh”, hồ sơ được chuyển nhân viên thay vì AI tự chọn bên thắng.
+
+- **Ai được báo, sau bao lâu (và người đó thấy gì):**
+  - Người bán được báo **ngay sau khi yêu cầu khiếu nại được gửi**, thấy ảnh sản phẩm, màu trong bản mô tả lúc đặt, tem phân loại và thời hạn phản hồi; không thấy lời nhắn riêng không liên quan hoặc dữ liệu cá nhân của người mua.
+  - Nhân viên được báo khi bằng chứng hai bên còn mâu thuẫn hoặc quá hạn mà chưa đủ căn cứ. Họ thấy bảng đối chiếu và lịch sử yêu cầu bằng chứng, không chỉ thấy câu đe doạ của người mua.
+  - Thời gian phản hồi giả định trong prototype là **24 giờ** để thể hiện luồng; số này không phải chính sách Shopee thật.
+
+- **Quyết định phản ứng của AI (Hỏi lại / Trả lời kèm giới hạn / Dừng và chuyển người):**
+  - *Đã cân nhắc:* (1) hoàn tiền ngay để xoa dịu; (2) từ chối ngay vì tem khớp đơn; (3) hỏi đúng bằng chứng còn thiếu rồi chờ hai bên; (4) chuyển nhân viên ngay.
+  - *Chọn:* **Hỏi lại để thu hẹp điểm mơ hồ**, bằng một yêu cầu ảnh cụ thể; đồng thời trả lời kèm giới hạn rằng tem khớp đơn nhưng ảnh hiện tại chưa đủ kết luận.
+  - *Vì sao chọn:* Màu sắc qua ảnh phụ thuộc ánh sáng. Một ảnh theo cùng điều kiện có thể tăng chất lượng bằng chứng với chi phí thấp, trong khi chưa ra quyết định hoàn tiền hoặc bác khiếu nại sẽ bảo vệ cả hai bên.
+  - *Vì sao loại hoàn tiền ngay:* Lời doạ không phải bằng chứng; `soan_hoan_tien` sai khiến người bán đúng mất tiền và có thể mất cả hàng.
+  - *Vì sao loại từ chối ngay:* Tem “Trắng kem” có thể đúng nhưng sản phẩm bên trong vẫn có màu khác; gọi `tu_choi_khieu_nai` lúc này có thể xử thua người mua.
+  - *Vì sao loại chuyển người ngay:* Hệ thống còn có thể hỏi một câu/bằng chứng rõ ràng để thu hẹp vấn đề. Chỉ chuyển khi bước này không giải được mâu thuẫn hoặc sắp hết hạn.
+
+- **Loại lỗi (Hệ thống / Người dùng / Ngữ cảnh):**
+  - *Phân loại:* **Lỗi ngữ cảnh/cảm nhận**: người mua có thể thật sự nhìn thấy màu khác, nhưng ảnh chịu ảnh hưởng của ánh sáng và lời đe doạ tạo áp lực không liên quan đến bằng chứng.
+  - *Vì sao cách nói đi theo loại lỗi:* AI công nhận sự sốt ruột nhưng không nói “bạn nói sai” hay tranh cãi về lời đe doạ; nó tách cảm xúc khỏi tiêu chí xét bằng chứng.
+  - *Vì sao cách sửa đi theo loại lỗi:* Hướng dẫn chụp trong điều kiện so sánh được, cho cả hai bên phản hồi và chuyển người khi vẫn mơ hồ; không thể sửa bằng cách ưu tiên bên nói mạnh hơn.
+
+### Nguyên tắc HAX/PAIR áp dụng (3 nguyên tắc)
+
+1. **HAX G2 — Làm rõ AI làm tốt tới đâu:** Trên màn N1, nhãn **“Thông tin sản phẩm đã thay đổi — chưa thể kết luận”** nói chính xác điều AI chưa thể xác định. Trên màn N2, nhãn **“Chưa đủ căn cứ — cần đối chiếu màu”** chỉ ra giới hạn của ảnh hiện có; nhóm không dùng con số phần trăm tự tin thiếu căn cứ.
+2. **HAX G10 — Thu hẹp khi nghi ngờ:** Ở N1, AI chỉ xin ảnh mã sản phẩm hoặc video thao tác kiểm tra ANC; ở N2, AI chỉ xin ảnh dưới ánh sáng tự nhiên cạnh vật trắng. Hai chỗ này nằm tại nút **“Bổ sung bằng chứng”**, thay vì bắt người dùng gửi lại mọi thứ hoặc đoán.
+3. **HAX G11 + PAIR Explainability/Trust — Giải thích vì sao:** Thẻ đối chiếu trên N1 hiển thị **bản mô tả lúc đặt “ANC” ↔ mô tả hiện tại “thụ động”**; thẻ N2 hiển thị **màu đặt ↔ tem nhận ↔ ảnh thực tế**. Người dùng và nhân viên đều thấy cùng căn cứ trước khi có quyết định hoàn tiền hoặc bác khiếu nại.
 
 ### Lỗi sửa câu chữ không cứu được & Cách thiết kế cứu nó
-- **Lỗi:**
-- **Vì sao sửa câu chữ không cứu được:**
-- **Thiết kế cứu nó thế nào:**
+
+- **Lỗi:** Hệ thống cho phép AI gọi `tu_choi_khieu_nai` bằng mô tả hiện tại ở N1, hoặc gọi `soan_hoan_tien` vì lời đe doạ ở N2, trước khi đối chiếu bản mô tả lúc đặt và bằng chứng hai bên.
+- **Vì sao sửa câu chữ không cứu được:** Dù AI thêm câu “mình có thể nhầm” hoặc xin lỗi rất hay, tiền vẫn đã đi về một bên và hành động khó đảo ngược. Cảnh báo không thay thế được kiểm soát quyền hành động.
+- **Thiết kế cứu nó thế nào:** (1) lưu và bắt buộc dùng bản mô tả lúc đặt; (2) hiển thị cùng một bảng bằng chứng cho người mua, người bán và người duyệt; (3) tách **AI soạn đề xuất** khỏi **người có thẩm quyền bấm duyệt hoàn tiền hoặc bác khiếu nại**; (4) khoá hai hành động này khi nguồn sự thật thiếu hoặc bằng chứng mâu thuẫn; (5) giữ khiếu nại mở và tự chuyển nhân viên khi quá hạn hoặc vẫn không đủ căn cứ.
 
 ---
 
