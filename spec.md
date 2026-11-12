@@ -1,57 +1,158 @@
-**Lớp:** L3A · **Bàn / zone:** ____ · **Track:** 4
+# Bài nộp LAB5 — T4 · Thương mại điện tử · Nhóm MQN
+
+**Lớp:** L3A · **Bàn / zone:** ____ · **Track:** T4 (Thương mại điện tử)
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
-|Vũ Quang Minh|2A202603657|  |
-|Nguyễn Công Quân|2A202603675|  |
-|Nguyễn Văn Nhi|2A202603697|  |
+| Nguyễn Văn Nhi | 2A202603697 |  |
+|  |  |  |
+|  |  |  |
 
-# Dàn ý bài nộp *(spec.md — nộp trước 23:59 ngày lab của lớp)*
-
-> Copy dàn ý này vào `spec.md` của nhóm. Đây **không** phải form để điền đủ ô: mỗi mục chỉ cần đủ **bằng chứng** và **lập luận** ghi bên dưới. Viết ngắn, gạch đầu dòng là được. Hướng dẫn từng chặng: `02-guide.md`. Cách chấm: `04-rubric.md`.
->
-> **Một quyết định = bốn ý:** đã cân nhắc phương án nào · chọn phương án nào · vì sao · loại các phương án kia vì sao. Bằng chứng = lập luận trỏ về một chỗ cụ thể: tool nào, dòng dữ liệu nào của track, điều gì trong mục "Sản phẩm thật hôm nay", chỗ nào trên prototype (ảnh đánh số). Không chạy agent.
-
-```markdown
-# Bài nộp LAB5 — [Track] · Nhóm [tên]
-[Danh sách thành viên và việc mỗi người làm — copy bảng từ README]
+---
 
 ## §1. Lát cắt & phạm vi
-- Lát cắt (chép từ track).
-- 3 việc tính năng KHÔNG làm, mỗi việc một câu vì sao.
 
-## §2. Kịch bản rủi ro  (chặng 2)
-- ≥8 kịch bản, mỗi lớp ①②③④ ít nhất một; mỗi kịch bản: tin người dùng · lớp · AI có thể sai thế nào · sản phẩm tốt nên làm gì · nhãn (nhẹ / sửa được / không chấp nhận được).
-- Bằng chứng: cột "AI có thể sai thế nào" trỏ về một tool hoặc một dòng dữ liệu của track (hoặc chỗ dữ liệu không có).
-- Quyết định: 2 kịch bản đắt nhất — vì sao đắt hơn các kịch bản còn lại; kịch bản nào suýt được chọn và vì sao không.
+- **Lát cắt (từ track T4):** Trong **Trò chuyện với Shopee**, khi **người mua** đang báo "hàng nhận không đúng mô tả", **AI tự hướng dẫn gửi yêu cầu trả hàng hoàn tiền, xin thêm bằng chứng, hay chuyển nhân viên**, để người mua biết đúng bước tiếp theo, và người bán không bị xử thua khi họ đúng.
 
-## §3. Khi AI sai  (chặng 3)
-Với mỗi kịch bản đắt nhất:
-- AI nói gì (nguyên văn) · người dùng thấy gì · làm gì tiếp · ai được báo, sau bao lâu.
-- Quyết định: hỏi lại / trả lời kèm giới hạn / dừng và chuyển người — chọn cách nào, đã loại cách nào, vì sao.
-- Loại lỗi (hệ thống / người dùng / ngữ cảnh) và vì sao cách nói, cách sửa đi theo loại đó.
-- 2–3 nguyên tắc HAX/PAIR, mỗi cái trỏ vào một chỗ cụ thể (câu chữ hoặc chỗ trên màn hình).
-- Lỗi nào sửa câu chữ không cứu được (nếu có), và thiết kế cứu nó thế nào.
+| Sản phẩm | Một người dùng | Một việc | Một quyết định của AI | Một kết quả |
+|---|---|---|---|---|
+| Trò chuyện với Shopee | Người mua | Báo "hàng nhận không đúng mô tả" | Tự hướng dẫn gửi yêu cầu trả hàng hoàn tiền, xin thêm bằng chứng, hay chuyển nhân viên | Người mua biết đúng bước tiếp theo, và người bán không bị xử thua khi họ đúng |
 
-## §4. Mức tự chủ  (chặng 4)
-Với mỗi tool:
-- Mức của nhóm (tự làm / cần người duyệt / cấm). Nếu cần người duyệt: ai duyệt · người duyệt thấy gì · quá hạn thì sao.
-- Lý do theo cost-of-error: sai thì ai chịu gì · đảo lại được không · chờ người thì mất gì.
-- Phương án đã cân nhắc và vì sao loại.
-Thêm:
-- Tool khó xếp nhất: mỗi người từng chọn gì, cái giá của mỗi phía (trỏ về kịch bản ở §2), nhóm chốt thế nào.
-- Thử mức đã đặt trên 2 kịch bản đắt nhất + 1 kịch bản bình thường: cái sai có bị chặn không? còn việc nào làm khi lẽ ra phải hỏi? người dùng bình thường có phải chờ vô ích không?
-- Luật thêm hoặc tool tách bước (nếu có), và vì sao.
-- Một mức tự chủ đã đổi lời hứa nào với người dùng.
+- **3 việc tính năng KHÔNG làm (kèm lý do):**
+  1. *(Chờ điền ở Chặng 1)*
+  2. *(Chờ điền ở Chặng 1)*
+  3. *(Chờ điền ở Chặng 1)*
 
-## §5. Prototype  (chặng 5)
-- Link hoặc file · công cụ · phần nào mock · có lời gọi AI thật không.
-- 1–2 ảnh có đánh số; mỗi số: thể hiện gì · nguyên tắc HAX/PAIR nào · mức tự chủ nào.
-- Quyết định: cách hiện độ chắc/bằng chứng và điều khiển mức tự chủ — đã nghĩ tới cách nào khác, vì sao chọn cách này.
+---
 
-## §6. Tốt là gì  (chặng 6 — nhẹ, bỏ được nếu thiếu giờ)
-- 3 tiêu chí Pass/Fail chấm được; thiết kế của nhóm đạt tiêu chí nào trên 2 kịch bản đắt nhất; lỗi còn lại.
+## §2. Kịch bản rủi ro *(chặng 2)*
+
+- **Bảng ≥8 kịch bản phủ đủ 4 lớp (① Nguồn sự thật · ② Mơ hồ / thiếu thông tin · ③ Ngoài phạm vi / thẩm quyền · ④ Đặc thù domain):**
+
+| # | Tin người dùng nhắn | Lớp | AI có thể sai thế nào *(trỏ về tool / dữ liệu)* | Sản phẩm tốt nên làm gì | Nhãn mức hại | Tên lỗi |
+|---|---|---|---|---|---|---|
+| 1 |  |  |  |  |  |  |
+| 2 |  |  |  |  |  |  |
+| 3 |  |  |  |  |  |  |
+| 4 |  |  |  |  |  |  |
+| 5 |  |  |  |  |  |  |
+| 6 |  |  |  |  |  |  |
+| 7 |  |  |  |  |  |  |
+| 8 |  |  |  |  |  |  |
+
+- **Quyết định chọn 2 kịch bản đắt nhất:**
+  - **Đã cân nhắc các phương án nào:**
+  - **Chọn 2 kịch bản nào & Vì sao đắt hơn các kịch bản còn lại:**
+  - **Kịch bản nào suýt được chọn & Vì sao loại:**
+
+---
+
+## §3. Khi AI sai *(chặng 3)*
+
+### Kịch bản đắt nhất #1: [Tên kịch bản]
+- **AI nói gì (nguyên văn):**
+- **Người dùng thấy gì (ngoài câu chữ):**
+- **Bước người dùng làm tiếp (và chuyện gì xảy ra nếu họ không làm gì):**
+- **Ai được báo, sau bao lâu (và người đó thấy gì):**
+- **Quyết định phản ứng của AI (Hỏi lại / Trả lời kèm giới hạn / Dừng và chuyển người):**
+  - *Đã cân nhắc:*
+  - *Chọn:*
+  - *Vì sao chọn & Vì sao loại các cách kia:*
+- **Loại lỗi (Hệ thống / Người dùng / Ngữ cảnh):**
+  - *Phân loại & Vì sao cách nói, cách sửa đi theo loại đó:*
+
+### Kịch bản đắt nhất #2: [Tên kịch bản]
+- **AI nói gì (nguyên văn):**
+- **Người dùng thấy gì (ngoài câu chữ):**
+- **Bước người dùng làm tiếp (và chuyện gì xảy ra nếu họ không làm gì):**
+- **Ai được báo, sau bao lâu (và người đó thấy gì):**
+- **Quyết định phản ứng của AI (Hỏi lại / Trả lời kèm giới hạn / Dừng và chuyển người):**
+  - *Đã cân nhắc:*
+  - *Chọn:*
+  - *Vì sao chọn & Vì sao loại các cách kia:*
+- **Loại lỗi (Hệ thống / Người dùng / Ngữ cảnh):**
+  - *Phân loại & Vì sao cách nói, cách sửa đi theo loại đó:*
+
+### Nguyên tắc HAX/PAIR áp dụng (2–3 nguyên tắc)
+1. **[Mã nguyên tắc — Tên]:** Trỏ vào câu chữ / vị trí cụ thể trên màn hình...
+2. **[Mã nguyên tắc — Tên]:** Trỏ vào câu chữ / vị trí cụ thể trên màn hình...
+3. **[Mã nguyên tắc — Tên]:** Trỏ vào câu chữ / vị trí cụ thể trên màn hình...
+
+### Lỗi sửa câu chữ không cứu được & Cách thiết kế cứu nó
+- **Lỗi:**
+- **Vì sao sửa câu chữ không cứu được:**
+- **Thiết kế cứu nó thế nào:**
+
+---
+
+## §4. Mức tự chủ *(chặng 4)*
+
+### 4.1 Bảng phân quyền mức tự chủ cho từng Tool
+
+| Tool | Làm gì | Đảo lại được không | Mức của nhóm | Ai duyệt · Thấy gì · Quá hạn thì sao *(nếu cần duyệt)* | Lý do theo Cost-of-Error *(Sai ai chịu · Đảo được không · Chờ mất gì)* | Phương án đã cân nhắc & Vì sao loại |
+|---|---|---|---|---|---|---|
+| `yeu_cau_bang_chung` | Gửi mẫu xin bằng chứng cho người mua hoặc người bán | Tin đã tới |  |  |  |  |
+| `chuyen_truong_nhom` | Chuyển hồ sơ cho trưởng nhóm | Được |  |  |  |  |
+| `soan_hoan_tien` | Hoàn tiền cho người mua | **Khó**: tiền đã về người mua |  |  |  |  |
+| `tu_choi_khieu_nai` | Đóng khiếu nại, tiền về người bán | **Khó**: tiền đã về người bán |  |  |  |  |
+| `phat_shop` | Trừ điểm uy tín, khoá shop | Khó, ảnh hưởng cả shop |  |  |  |  |
+
+### 4.2 Tool khó xếp nhất
+- **Tool:**
+- **Mỗi thành viên ban đầu chọn gì:**
+- **Cái giá của mỗi phía (trỏ về kịch bản ở §2):**
+- **Cách nhóm chốt (kèm luật thêm hoặc tách tool thành 2 bước nếu có):**
+
+### 4.3 Thử mức tự chủ trên 3 kịch bản (2 kịch bản đắt nhất + 1 kịch bản bình thường)
+1. **Kịch bản đắt nhất #1:**
+   - *Cái sai ở §2 có bị chặn không?*
+   - *Còn việc nào AI vẫn làm khi lẽ ra phải hỏi?*
+   - *Người dùng bình thường có phải chờ vô ích không?*
+2. **Kịch bản đắt nhất #2:**
+   - *Cái sai ở §2 có bị chặn không?*
+   - *Còn việc nào AI vẫn làm khi lẽ ra phải hỏi?*
+   - *Người dùng bình thường có phải chờ vô ích không?*
+3. **Kịch bản bình thường:**
+   - *Cái sai ở §2 có bị chặn không?*
+   - *Còn việc nào AI vẫn làm khi lẽ ra phải hỏi?*
+   - *Người dùng bình thường có phải chờ vô ích không?*
+
+### 4.4 Thay đổi lời hứa với người dùng
+- **Mức tự chủ đã đổi lời hứa nào với người dùng:**
+
+---
+
+## §5. Prototype *(chặng 5)*
+
+- **Link / File:** [prototype/index.html](./prototype/index.html)
+- **Công cụ:** HTML / CSS / JS
+- **Phần nào mock / Có lời gọi AI thật không:**
+- **Ảnh chụp màn hình có đánh số:**
+  - *(Chèn ảnh 1 & 2 tại đây)*
+  - **Chú thích các điểm đánh số:**
+    - **[1]:** Thể hiện gì · Nguyên tắc HAX/PAIR nào · Mức tự chủ nào.
+    - **[2]:** ...
+- **Quyết định thiết kế giao diện (hiển thị độ chắc/bằng chứng & điều khiển mức tự chủ):**
+  - *Đã nghĩ tới cách nào khác:*
+  - *Vì sao chọn cách này & loại cách kia:*
+
+---
+
+## §6. Tốt là gì *(chặng 6 — nhẹ)*
+
+- **3 tiêu chí Pass/Fail chấm được:**
+  1. **Tiêu chí 1:**
+  2. **Tiêu chí 2:**
+  3. **Tiêu chí 3:**
+- **Chấm thử trên 2 kịch bản đắt nhất:**
+  - *Kịch bản đắt nhất #1:*
+  - *Kịch bản đắt nhất #2:*
+- **Lỗi còn lại chưa sửa được:**
+
+---
 
 ## §7. Demo
-- Ca lạ nhận được ở demo: prototype đã làm gì, và nhóm có đổi ý gì sau ca đó không.
-```
+
+- **Ca lạ nhận được ở demo:**
+- **Prototype đã xử lý thế nào:**
+- **Nhóm có đổi ý gì sau ca đó không:**
